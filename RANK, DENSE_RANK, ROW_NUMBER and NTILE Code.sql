@@ -42,6 +42,8 @@ FROM [dbo].[Sales];
 
 -- ROW_NUMBER()
 
+
+-- show a row number field in the list ordered by [Quantity]
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -50,6 +52,7 @@ SELECT
 	,ROW_NUMBER() OVER(ORDER BY [Quantity]) SalesRank
 FROM [dbo].[Sales];
 
+-- order the row number by [Quantity] in Descending order
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -58,6 +61,7 @@ SELECT
 	,ROW_NUMBER() OVER(ORDER BY [Quantity] DESC) SalesRank
 FROM [dbo].[Sales];
 
+-- start new row numbers to each different [SalesPerson]
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -66,6 +70,7 @@ SELECT
 	,ROW_NUMBER() OVER(PARTITION BY [SalesPerson] ORDER BY [Quantity] DESC) SalesRank
 FROM [dbo].[Sales];
 
+-- order the row numbers first by [SalesPerson] then by [Quantity]
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -77,6 +82,7 @@ FROM [dbo].[Sales];
 
 -- RANK()
 
+-- Rank the rows based on the value of [Quantity] in Descending order
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -85,6 +91,7 @@ SELECT
 	,RANK() OVER(ORDER BY [Quantity] DESC) SalesRank
 FROM [dbo].[Sales];
 
+-- rank the rows of each different product
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -96,6 +103,7 @@ FROM [dbo].[Sales];
 
 -- DENSE_RANK()
 
+-- Rank the rows based on the value of [Quantity] in Descending order
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -104,7 +112,7 @@ SELECT
 	,DENSE_RANK() OVER(ORDER BY [Quantity] DESC) SalesRank
 FROM [dbo].[Sales];
 
-
+-- rank the rows of each different product
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -116,6 +124,7 @@ FROM [dbo].[Sales];
 
 -- NTILE()
 
+-- divide the number of rows into one group - resultant NTILE field shows all 1's
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -124,6 +133,7 @@ SELECT
 	,NTILE(1) OVER(ORDER BY [Quantity] DESC) SalesRank
 FROM [Sales];
 
+-- divide the number of rows into two groups
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -132,6 +142,7 @@ SELECT
 	,NTILE(2) OVER(ORDER BY [Quantity] DESC) SalesRank
 FROM [Sales];
 
+-- divide the number of rows into fifteen groups
 SELECT 
 	 [ID]
 	,[SalesPerson]	
@@ -140,6 +151,7 @@ SELECT
 	,NTILE(15) OVER(ORDER BY [Quantity] DESC) SalesRank
 FROM [Sales];
 
+-- divide the number of rows for each different Product into 2 groups
 SELECT 
 	 [ID]
 	,[SalesPerson]	
