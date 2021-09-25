@@ -1,5 +1,6 @@
 
 -- Create the example table and add in some data.
+-- https://git.io/JzXE2
 
 -- DROP TABLE [dbo].[Sales]
 
