@@ -105,8 +105,8 @@ GO
 
 -- execute the select from the CTE
 SELECT 
-	 [Name]		AS 'employee' 
-	,[Manager] 
+	 [Manager] 
+	,[Name]		AS 'employee' 
 FROM [Managers]
 
 GO
