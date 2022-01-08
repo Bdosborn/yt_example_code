@@ -182,7 +182,7 @@ FROM
 -- using DATEADD to subtract one year from the order_date value
 SELECT
      [order_date]
-	,DATEADD(year, -1, [order_date]) 'order+2M'
+	,DATEADD(year, -1, [order_date]) 'order-1Y'
 FROM
     [dbo].[ORDERS]
 
@@ -219,30 +219,34 @@ WHERE
 DECLARE @MyDate AS DATETIME
 SET @MyDate = '2021-10-30'
 
-SELECT DATEDIFF(month, 0, @mydate) 'days_since_zero'
+SELECT DATEDIFF(month, 0, @MyDate) 'days_since_zero'
 
 SELECT DATEADD(month, 1461, 0) 'zero_plus_1461_months'
 
-SELECT DATEADD(month, DATEDIFF(month, 0, @mydate), 0) 'month_start'
+SELECT DATEADD(month, DATEDIFF(month, 0, @MyDate), 0) 'month_start'
 
 -- show all orders where the order_date is between the first and the last date of our date variable
 SELECT     
      [order_number]
     ,[order_date]
-FROM	[ORDERS]
-WHERE	[order_date] BETWEEN     
-                        DATEADD(month,  DATEDIFF(month, 0, @mydate), 0)
-                        AND DATEADD(day,-1, DATEADD(month, DATEDIFF(month, -1, @mydate), 0))
+FROM	
+    [dbo].[ORDERS]
+WHERE	
+    [order_date] BETWEEN     
+                   DATEADD(month,  DATEDIFF(month, 0, @MyDate), 0)
+                    AND DATEADD(day,-1, DATEADD(month, DATEDIFF(month, -1, @MyDate), 0))
 GO
 
 -- show all orders where the order_date is within the current month
 SELECT     
      [order_number]
     ,[order_date]
-FROM	[dbo].[ORDERS]
-WHERE	[order_date] BETWEEN     
-                        DATEADD(month,  DATEDIFF(month, 0, CURRENT_TIMESTAMP), 0)
-                        AND DATEADD(day,-1, DATEADD(month, DATEDIFF(month, -1, CURRENT_TIMESTAMP), 0))
+FROM	
+    [dbo].[ORDERS]
+WHERE	
+    [order_date] BETWEEN     
+                   DATEADD(month,  DATEDIFF(month, 0, CURRENT_TIMESTAMP), 0)
+                    AND DATEADD(day,-1, DATEADD(month, DATEDIFF(month, -1, CURRENT_TIMESTAMP), 0))
 GO
 
 
